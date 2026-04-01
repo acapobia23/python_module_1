@@ -8,7 +8,7 @@ class Plant:
         self.rate = round(rate, 2)
 
     def show(self) -> None:
-        print(f"{self.name}: {self.get_height()}cm, {self.get_age()} days old")
+        print(f"{scdelf.name}: {self.get_height()}cm, {self.get_age()} days old")
 
     def grow(self) -> None:
         self.__height = round(self.get_height() + self.rate, 2)
