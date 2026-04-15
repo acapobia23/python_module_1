@@ -28,7 +28,7 @@ def get_player_pos() -> tuple:
                 except:
                     break
             if i != 3:
-                    raise CordinateInputError
+                raise CordinateInputError
             i = 0
             while i < 3:
                 numbers = numbers + (round(float(mtx[i]), 1),)
