@@ -217,8 +217,3 @@ if __name__ == "__main__":
     sunflower.show()
     print("[statistics for Rose]")
     show_stats(sunflower)
-
-
-
-
-    

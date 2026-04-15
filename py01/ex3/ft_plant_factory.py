@@ -1,5 +1,6 @@
 class Plant:
-    def __init__(self, name: str, height: float, old: int, rate: float = 1) -> None:
+    def __init__(self, name: str, height: float, old: int,
+                 rate: float = 1) -> None:
         self.name = name
         self.height = round(height, 2)
         self.old = round(old)
@@ -16,7 +17,7 @@ class Plant:
 
 
 if __name__ == "__main__":
-    ft_list = [Plant("Rose", 25.0, 30), Plant("Oak", 200.0, 365), 
+    ft_list = [Plant("Rose", 25.0, 30), Plant("Oak", 200.0, 365),
                Plant("Cactus", 5.0, 90), Plant("Sunflower", 80.0, 45),
                Plant("Fern", 15.0, 120)]
     i = 0

@@ -1,5 +1,6 @@
 class Plant:
-    def __init__(self, name: str, height: float, old: int, rate: float) -> None:
+    def __init__(self, name: str, height: float, old: int,
+                 rate: float) -> None:
         self.name = name
         self.height = round(height, 2)
         self.old = round(old)
