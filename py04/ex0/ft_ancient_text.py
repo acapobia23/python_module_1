@@ -1,31 +1,33 @@
-import sys, typing
+import sys
+import typing
+
 
 class AncientTextError(Exception):
-    def __init__(self, message="Unkow AncientTextError"):
+    def __init__(self, message: str = "Unkow AncientTextError"):
         super().__init__(message)
 
 
 class AncientInputError(AncientTextError):
-    def __init__(self, message="Usage: ft_ancient_text.py <file>"):
+    def __init__(self, message: str = "Usage: ft_ancient_text.py <file>"):
         super().__init__(message)
 
 
-def read_file(file: typing.IO) -> str:
+def read_file(file: typing.IO[str]) -> str:
     lines = file.read()
     print("---\n")
     print(lines)
     print("---")
-    return (lines)
+    return lines
 
 
-def open_read_close_file(filename:str) -> str:
-        print("=== Cyber Archives Recovery ===")
-        print(f"Accessing file '{filename}'")
-        file = open(filename, "r")
-        lines = read_file(file)
-        file.close()
-        print(f"File '{filename}' closed.\n")
-        return lines
+def open_read_close_file(filename: str) -> str:
+    print("=== Cyber Archives Recovery ===")
+    print(f"Accessing file '{filename}'")
+    file = open(filename, "r")
+    lines = read_file(file)
+    file.close()
+    print(f"File '{filename}' closed.\n")
+    return lines
 
 
 if __name__ == "__main__":
@@ -39,4 +41,3 @@ if __name__ == "__main__":
     except (FileNotFoundError, PermissionError, IsADirectoryError,
             ValueError) as e:
         print(f"Error opening file '{filename}':", e)
-    
