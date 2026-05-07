@@ -1,0 +1,11 @@
+[tool.poetry]
+name = "loading"
+version = "0.1.0"
+description = "Matrix data loading project"
+authors = ["acapobia <you@example.com>"]
+
+[tool.poetry.dependencies]
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+requests = "*"
