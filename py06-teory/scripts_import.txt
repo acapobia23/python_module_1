@@ -1,0 +1,65 @@
+ft_alembic_0.py
+ft_alembic_1.py
+ft_alembic_2.py
+ft_alembic_3.py
+ft_alembic_4.py
+ft_alembic_5.py
+In order to carefully test our laboratory architecture, create the following six scripts:
+•ft_alembic_0.py will use the import ... structure to access elements.py directly
+and then create fire.
+•ft_alembic_1.py will use the from ... import ... structure to access elements.py
+directly and then create water.
+•ft_alembic_2.py will use the import ... structure to access alchemy/elements.py
+directly and then create earth.
+ft_alembic_3.py will use the from ... import ... structure to access
+alchemy/elements.py directly and then create air.
+•ft_alembic_4.py will use import alchemy to access the alchemy module and then
+create air. The create_earth() function will not be exposed through the module
+interface and raise an exception when called (you can catch the exception or not, this
+is only for pedagogical purposes). A mypy error will also raise, again, on purpose.
+•ft_alembic_5.py will use the from alchemy import ... structure to access the
+alchemy module and then create air.
+You may face flake8 / mypy errors over your __init__.py file. Follow
+usual conventions in this situation
+
+
+
+ft_distillation_0.py
+ft_distillation_1.py
+In order to check these new functionalities, create the following two scripts:
+•ft_distillation_0.py will use the from ... import ... structure to access
+alchemy/potions.py directly and then brew both healing and strength potions.
+•ft_distillation_1.py will use the import alchemy structure to access the alchemy
+module, then brew the original strength potion and the special heal() potion, which
+is a package alias of the healing potion. You will need to improve your __init__.py
+
+
+
+ft_transmutation_0.py
+ft_transmutation_1.py
+ft_transmutation_2.py
+Create three testing scripts to verify everything imports successfully:
+•ft_transmutation_0.py will use the import ... structure to access
+alchemy/transmutation/recipes.py directly and then achieve transformation of
+lead into gold.
+•ft_transmutation_1.py will use the import ... structure to import the module
+transmutation directly and then achieve transformation of lead into gold.
+•ft_transmutation_2.py will use the import ... structure to import the module
+alchemy directly and then achieve transformation of lead into gold.
+
+
+
+
+
+ft_kaboom_0.py
+ft_kaboom_1.py
+Time to test a few spells! Create two scripts to demonstrate that light magic avoids
+circular dependencies and laboratory explosions, and that dark magic is dangerous and
+explodes because of circular dependencies:
+•ft_kaboom_0.py will access the grimoire module directly and then record a light
+spell, flawlessly. There are multiple ways to avoid circular dependencies; you pick
+one. Be prepared to explain the different approaches during the evaluation.
+•ft_kaboom_1.py will secretly access the dark_spellbook.py directly and then try
+to record a dark spell. This must fail and raise an exception (you can choose to
+catch it or not; it’s only for pedagogical purposes), indicating that your alchemist
+laboratory has just exploded.

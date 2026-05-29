@@ -1,0 +1,184 @@
+COSMIC DATA - GUIDA RAPIDA E LEGGIBILE
+=====================================
+
+Ambiente virtuale
+-----------------
+
+Linux/macOS:
+python -m venv matrix_env
+source matrix_env/bin/activate
+
+Windows (PowerShell):
+python -m venv matrix_env
+.\matrix_env\Scripts\Activate.ps1
+
+
+1) Introduzione
+---------------
+
+Benvenuto nel Cosmic Data Observatory. In questo percorso userai Pydantic per validare
+flussi di dati provenienti da missioni spaziali, report di contatto alieno e sistemi di
+monitoraggio.
+
+Obiettivo: passare da modelli base a regole di validazione avanzate, garantendo
+integrita e coerenza dei dati.
+
+Tema degli esercizi:
+- Space Stations: basi della validazione
+- Alien Contacts: regole personalizzate
+- Crew Management: modelli annidati e relazioni complesse
+
+Nota utile:
+Pydantic converte automaticamente tipi compatibili (es. stringa -> datetime) e fornisce
+errori di validazione molto dettagliati.
+
+
+2) Requisiti generali
+---------------------
+
+- Python 3.10+
+- Stile: flake8
+- Type hints obbligatori (controllo con mypy)
+- Gestione eccezioni per proteggere i flussi dati
+- Consentiti tipi standard (int, str, list, dict, ...)
+- Consentite funzioni built-in
+- Package manager: pip
+- Ambiente virtuale obbligatorio (venv/virtualenv/conda)
+- Pydantic 2.x obbligatorio in tutti gli esercizi
+
+
+3) Struttura progetto
+---------------------
+
+- Un esercizio per cartella: ex0/, ex1/, ex2/
+- Completa gli esercizi in ordine
+- Evita copy-paste cieco: mostra comprensione
+- Usa nomi variabili chiari e commenti utili
+- Consegna sul repository Git assegnato
+
+
+4) Tool disponibili
+-------------------
+
+- data_generator.py: genera dati realistici di test
+- data_exporter.py: esporta in JSON, CSV e formato Python
+- generated_data/: dataset gia pronti
+
+Import consentiti:
+- Dati JSON/CSV dai tool
+- Moduli standard Python (json, csv, datetime, ...)
+
+Importante (Pydantic v2):
+- Non usare @validator (deprecato)
+- Usa @model_validator
+
+
+5) Concetti chiave di Pydantic
+------------------------------
+
+BaseModel
+- Classe base per creare modelli con validazione automatica
+
+Field(...)
+- Aggiunge vincoli, descrizioni e valori di default ai campi
+
+@model_validator(mode="after")
+- Validazione personalizzata dopo i controlli built-in
+
+
+6) Tipi e validazione: panoramica pratica
+-----------------------------------------
+
+6.1 Stringhe (str)
+- Accetta stringhe "as-is"
+- Converte bytes/bytearray in UTF-8
+- Possibile coercizione numeri -> stringa (se configurata)
+
+Vincoli comuni:
+- pattern
+- min_length, max_length
+- strip_whitespace
+- to_upper, to_lower
+- ascii_only
+
+Strict mode:
+- Usa StrictStr per accettare solo stringhe vere
+
+Esempio:
+from typing import Annotated
+from pydantic import BaseModel, StringConstraints
+
+class StringModel(BaseModel):
+    str_value: str = ""
+    constrained_str_value: Annotated[str, StringConstraints(to_lower=True)] = ""
+
+print(StringModel(str_value="test").str_value)
+print(StringModel(constrained_str_value="TEST").constrained_str_value)
+
+
+6.2 Bytes (bytes)
+- Valida bytes direttamente
+- Converte stringhe/bytearray in bytes secondo la configurazione
+
+Vincoli comuni:
+- min_length
+- max_length
+
+Strict mode:
+- Usa StrictBytes per accettare solo bytes
+
+
+6.3 Numeri
+
+Interi (int)
+- Converte da stringhe/bytes quando possibile
+- Puo accettare float solo se parte decimale = 0
+
+Vincoli:
+- le, ge, lt, gt, multiple_of
+
+Tipi utili:
+- PositiveInt
+- NegativeInt
+- NonPositiveInt
+- NonNegativeInt
+- StrictInt (strict mode)
+
+Float (float)
+- Converte da stringhe/bytes quando possibile
+- Supporta oggetti con __float__() o __index__()
+
+Vincoli:
+- le, ge, lt, gt, multiple_of
+- allow_inf_nan
+
+Tipi utili:
+- PositiveFloat
+- NegativeFloat
+- NonPositiveFloat
+- NonNegativeFloat
+- FiniteFloat
+- StrictFloat (strict mode)
+
+
+6.4 IntEnum
+- Se usi una sottoclasse di IntEnum, Pydantic valida membri enum o valori compatibili
+
+
+6.5 Decimal
+- Accetta istanze Decimal e valori convertibili dal costruttore Decimal
+
+Vincoli:
+- le, ge, lt, gt, multiple_of
+- allow_inf_nan
+- max_digits
+- decimal_places
+
+
+7) Promemoria finale
+--------------------
+
+- Mantieni il focus su Pydantic v2
+- Modelli semplici prima, poi regole custom
+- Scrivi test dati realistici con i tool forniti
+- Leggi sempre i messaggi di errore: sono parte del processo di apprendimento
